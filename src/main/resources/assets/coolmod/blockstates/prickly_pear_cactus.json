@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "age=0": {"model": "coolmod:block/prickly_cactus_sprout"},
+    "age=1": {"model": "coolmod:block/prickly_cactus_sprout"},
+    "age=2": {"model": "coolmod:block/prickly_pear_cactus_fruitless"},
+    "age=3": {"model": "coolmod:block/prickly_pear_cactus"}
+  }
+}

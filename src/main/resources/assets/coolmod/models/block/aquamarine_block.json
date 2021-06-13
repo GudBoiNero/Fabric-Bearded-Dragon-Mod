@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "coolmod:blocks/aquamarine_block"
+  }
+}

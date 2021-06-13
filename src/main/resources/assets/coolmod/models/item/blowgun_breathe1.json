@@ -1,0 +1,6 @@
+{
+  "parent": "coolmod:item/blowgun",
+  "textures": {
+    "layer0": "coolmod:items/blowgun_breathe1"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "coolmod:aquamarine"
+    }
+  },
+  "result": {
+    "item": "coolmod:aquamarine_block",
+    "count": 1
+  }
+}
