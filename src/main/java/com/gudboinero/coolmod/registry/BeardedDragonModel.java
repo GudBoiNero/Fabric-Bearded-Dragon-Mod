@@ -31,10 +31,7 @@ public class BeardedDragonModel extends AnimatedGeoModel<BeardedDragonEntity> im
     }
     @Override
     public Identifier getTextureLocation(BeardedDragonEntity object) {
-        CompoundTag tag = new CompoundTag();
-        object.writeCustomDataToTag(tag);
-        int yourInt = tag.getInt("color");
-        return TEX[yourInt];
+        return TEX[object.DRAGON_COLOR];
     }
 
 
