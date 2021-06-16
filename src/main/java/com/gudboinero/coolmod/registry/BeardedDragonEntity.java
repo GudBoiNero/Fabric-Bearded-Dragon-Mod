@@ -7,8 +7,10 @@ import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -25,8 +27,7 @@ public class BeardedDragonEntity extends PathAwareEntity implements IAnimatable 
     private AnimationFactory factory = new AnimationFactory(this);
     public int SUN_METER;
     public boolean SLEEPING;
-    public int COLOR = random.nextInt(2);
-    //public Identifier color_ident = new BeardedDragonModel().assignColorByID(COLOR);
+    public int DRAGON_COLOR;
 
     public BeardedDragonEntity(EntityType<? extends PathAwareEntity> type, World worldIn) {
         super(type, worldIn);
@@ -43,9 +44,14 @@ public class BeardedDragonEntity extends PathAwareEntity implements IAnimatable 
         this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
     }
 
+    public boolean isInWater() {
+        return !this.firstUpdate && this.fluidHeight.getDouble(FluidTags.WATER) > 0.0D;
+    }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (event.isMoving()) {
+        if (this.isInWater()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bearded_dragon.swim", true));
+        } else if (event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bearded_dragon.run", true));
         } else {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bearded_dragon.idle", true));
@@ -53,19 +59,25 @@ public class BeardedDragonEntity extends PathAwareEntity implements IAnimatable 
         return PlayState.CONTINUE;
     }
 
-
-
-
-    @Override
-    public void readCustomDataFromTag(CompoundTag tag) {
-        super.readCustomDataFromTag(tag);
-        this.COLOR = tag.getInt("color");
+    public int colorGen(){
+        int COLOR;
+        COLOR = random.nextInt(2);
+        return COLOR;
     }
 
     @Override
     public void writeCustomDataToTag(CompoundTag tag) {
         super.readCustomDataFromTag(tag);
-        tag.putInt("color", COLOR);
+        int active = tag.getInt("color");
+        if (active != -1){
+            tag.putInt("color", colorGen());
+        } tag.putInt("color", tag.getInt("color"));
+    }
+
+    @Override
+    public void readCustomDataFromTag(CompoundTag tag) {
+        super.readCustomDataFromTag(tag);
+        DRAGON_COLOR = tag.getInt("color");
     }
 
     @Override
@@ -79,8 +91,6 @@ public class BeardedDragonEntity extends PathAwareEntity implements IAnimatable 
     {
         return this.factory;
     }
-
-
 
     @Override
     public boolean isInvulnerableTo(DamageSource damageSource) {
