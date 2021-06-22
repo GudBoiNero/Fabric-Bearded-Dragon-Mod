@@ -2,6 +2,7 @@ package com.gudboinero.coolmod.registry;
 
 import com.gudboinero.coolmod.CoolMod;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.data.DataTracker;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -21,7 +22,8 @@ public class BeardedDragonModel extends AnimatedGeoModel<BeardedDragonEntity> im
 
     private static final Identifier[] TEX = {
             new Identifier(CoolMod.MOD_ID, "textures/models/bearded_dragon.png"),
-            new Identifier(CoolMod.MOD_ID, "textures/models/blue_bearded_dragon.png")};
+            new Identifier(CoolMod.MOD_ID, "textures/models/blue_bearded_dragon.png"),
+            new Identifier(CoolMod.MOD_ID, "textures/models/green_crested_bearded_dragon.png")};
     public BeardedDragonModel() {
     }
 
@@ -31,10 +33,7 @@ public class BeardedDragonModel extends AnimatedGeoModel<BeardedDragonEntity> im
     }
     @Override
     public Identifier getTextureLocation(BeardedDragonEntity object) {
-        CompoundTag tag = new CompoundTag();
-        object.writeCustomDataToTag(tag);
-        int yourInt = tag.getInt("color");
-        return TEX[yourInt];
+        return TEX[object.getVariant()];
     }
 
 
@@ -44,15 +43,8 @@ public class BeardedDragonModel extends AnimatedGeoModel<BeardedDragonEntity> im
         return new Identifier(CoolMod.MOD_ID, "animations/bearded_dragon.animation.json");
     }
 
-    @Override
-    public void registerControllers(AnimationData animationData) {
-
-    }
-
-    @Override
-    public AnimationFactory getFactory() {
-        return null;
-    }
+    @Override public void registerControllers(AnimationData animationData) {}
+    @Override public AnimationFactory getFactory() {return null;}
 
     @Override
     public void setLivingAnimations(BeardedDragonEntity entity, Integer uniqueID, AnimationEvent customPredicate) {
@@ -60,16 +52,13 @@ public class BeardedDragonModel extends AnimatedGeoModel<BeardedDragonEntity> im
         IBone head = this.getAnimationProcessor().getBone("head");
         getBone("bb_main").setRotationY(89.5f);
 
+        //System.out.println(BeardedDragonEntity.SUN_METER.getId());
+
         LivingEntity entityIn = (LivingEntity) entity;
         EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
         if (head != null) {
             head.setRotationZ(extraData.headPitch * ((float) Math.PI / 180f));
             head.setRotationY(extraData.netHeadYaw * ((float) Math.PI / 180f));
         }
-    }
-
-    public final Identifier assignColorByID(int id) {
-        id = constrainToRange(id,0,TEX.length);
-        return TEX[id];
     }
 }

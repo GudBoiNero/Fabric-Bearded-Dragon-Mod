@@ -27,10 +27,6 @@ public class CoolModClient implements ClientModInitializer {
             }
         });
 
-        EntityRendererRegistry.INSTANCE.register(CoolMod.CUBE, (dispatcher, context) -> {
-            return new CubeEntityRenderer(dispatcher);
-        });
-
         FabricModelPredicateProviderRegistry.register(blowgun, new Identifier("pulling"), (itemStack, clientWorld, livingEntity) -> {
             return livingEntity != null && livingEntity.isUsingItem() && livingEntity.getActiveItem() == itemStack ? 1.0F : 0.0F;
         });
@@ -39,6 +35,8 @@ public class CoolModClient implements ClientModInitializer {
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PRICKLY_PEAR_CACTUS, RenderLayer.getCutout());
         registerBowPredicates((BlowgunItem) ModItems.BLOWGUN);
+
+        // Entities
         EntityRendererRegistry.INSTANCE.register(CoolMod.BEARDED_DRAGON,
                 (entityRenderDispatcher, context) -> new BeardedDragonRenderer(entityRenderDispatcher));
     }

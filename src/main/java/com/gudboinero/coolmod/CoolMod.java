@@ -21,11 +21,11 @@ import static net.minecraft.entity.mob.MobEntity.createMobAttributes;
 public class CoolMod implements ModInitializer {
     public static final String MOD_ID = "coolmod";
 
-    public static final EntityType<CubeEntity> CUBE = Registry.register(
+    /*public static final EntityType<CubeEntity> CUBE = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier("coolmod", "cube"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, CubeEntity::new).dimensions(EntityDimensions.fixed(0.75f, 0.75f)).build()
-    );
+    );*/
 
     public static final EntityType<BeardedDragonEntity> BEARDED_DRAGON = Registry.register(
             Registry.ENTITY_TYPE,
@@ -41,7 +41,7 @@ public class CoolMod implements ModInitializer {
         ModBlocks.registerBlocks();
 
         //Attributes
-        FabricDefaultAttributeRegistry.register(CUBE, createMobAttributes());
+        //FabricDefaultAttributeRegistry.register(CUBE, createMobAttributes());
         FabricDefaultAttributeRegistry.register(BEARDED_DRAGON, createMobAttributes());
     }
 }
