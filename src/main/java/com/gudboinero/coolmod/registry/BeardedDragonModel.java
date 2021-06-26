@@ -23,7 +23,13 @@ public class BeardedDragonModel extends AnimatedGeoModel<BeardedDragonEntity> im
     private static final Identifier[] TEX = {
             new Identifier(CoolMod.MOD_ID, "textures/models/bearded_dragon.png"),
             new Identifier(CoolMod.MOD_ID, "textures/models/blue_bearded_dragon.png"),
-            new Identifier(CoolMod.MOD_ID, "textures/models/green_crested_bearded_dragon.png")};
+            new Identifier(CoolMod.MOD_ID, "textures/models/green_crested_bearded_dragon.png"),
+            new Identifier(CoolMod.MOD_ID, "textures/models/bearded_dragon_bright.png"),
+            new Identifier(CoolMod.MOD_ID, "textures/models/blue_bearded_dragon_bright.png"),
+            new Identifier(CoolMod.MOD_ID, "textures/models/green_crested_bearded_dragon_bright.png"),
+            new Identifier(CoolMod.MOD_ID, "textures/models/bearded_dragon_dark.png"),
+            new Identifier(CoolMod.MOD_ID, "textures/models/blue_bearded_dragon_dark.png"),
+            new Identifier(CoolMod.MOD_ID, "textures/models/green_crested_bearded_dragon_dark.png")};
     public BeardedDragonModel() {
     }
 
@@ -33,7 +39,7 @@ public class BeardedDragonModel extends AnimatedGeoModel<BeardedDragonEntity> im
     }
     @Override
     public Identifier getTextureLocation(BeardedDragonEntity object) {
-        return TEX[object.getVariant()];
+        return TEX[object.getTintedColor()];
     }
 
 
