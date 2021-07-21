@@ -19,6 +19,18 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class BeardedDragonRenderer extends GeoEntityRenderer<BeardedDragonEntity>
 {
+    public static final Identifier[] TEXTURES = {
+            new Identifier(CoolMod.MOD_ID, "textures/models/bearded_dragon.png"),
+            new Identifier(CoolMod.MOD_ID, "textures/models/blue_bearded_dragon.png"),
+            new Identifier(CoolMod.MOD_ID, "textures/models/green_crested_bearded_dragon.png"),
+            new Identifier(CoolMod.MOD_ID, "textures/models/bearded_dragon_bright.png"),
+            new Identifier(CoolMod.MOD_ID, "textures/models/blue_bearded_dragon_bright.png"),
+            new Identifier(CoolMod.MOD_ID, "textures/models/green_crested_bearded_dragon_bright.png"),
+            new Identifier(CoolMod.MOD_ID, "textures/models/bearded_dragon_dark.png"),
+            new Identifier(CoolMod.MOD_ID, "textures/models/blue_bearded_dragon_dark.png"),
+            new Identifier(CoolMod.MOD_ID, "textures/models/green_crested_bearded_dragon_dark.png")
+    };
+
     public BeardedDragonRenderer(EntityRenderDispatcher renderManager)
     {
         super(renderManager, new BeardedDragonModel());

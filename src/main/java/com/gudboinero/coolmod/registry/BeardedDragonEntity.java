@@ -73,9 +73,9 @@ public class BeardedDragonEntity extends TameableShoulderEntity implements IAnim
         //this.goalSelector.add(2, new SunbatheGoal(this, .7F, SUN_METER));
 
         this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(0, new FollowOwnerGoal(this, 1.0D, 5.0F, 1.0F, true));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 0.8D));
         this.goalSelector.add(2, new SitOnOwnerShoulderGoal(this));
+        this.goalSelector.add(2, new FollowOwnerGoal(this, 0.5D, 5.0F, 1.0F, true));
         this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.45D));
         this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
     }
@@ -193,7 +193,7 @@ public class BeardedDragonEntity extends TameableShoulderEntity implements IAnim
         return damageSource == DamageSource.CACTUS || super.isInvulnerableTo(damageSource);
     }
     static {
-        TAMING_INGREDIENTS = Sets.newHashSet((Items.WHEAT_SEEDS));
+        TAMING_INGREDIENTS = Sets.newHashSet((ModItems.PRICKLY_PEAR), (Items.SPIDER_EYE));
         COLOR = DataTracker.registerData(BeardedDragonEntity.class, TrackedDataHandlerRegistry.INTEGER);
         SUN_METER = DataTracker.registerData(BeardedDragonEntity.class, TrackedDataHandlerRegistry.INTEGER);
     }
